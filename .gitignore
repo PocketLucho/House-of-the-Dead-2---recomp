@@ -1,0 +1,36 @@
+build/
+artifact/
+
+# macOS
+.DS_Store
+shell/apple/emulator-ios/OpenMP/OpenMP.xcframework
+
+# Visual Studio
+.vs/
+.vscode/
+out/
+
+# JetBrains IDES
+.idea/
+cmake-build-*/
+
+# Dependencies from .gitmodules
+core/deps/breakpad/
+core/deps/glslang/
+.cache/
+compile_commands.json
+CMakeUserPresets.json
+
+# THE HOUSE OF THE DEAD 2 - RECOMP: never commit game-derived files
+/build*/
+/dist/
+/hotd2_game.dll
+/libhotd2_game.so
+/roms/
+/data/
+*_boot*.state
+*.eeprom
+*.nvmem
+/hotd2/builder/gen/
+/hotd2/builder/obj/
+/hotd2/builder/tools/

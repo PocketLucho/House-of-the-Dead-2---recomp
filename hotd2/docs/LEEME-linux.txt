@@ -1,0 +1,18 @@
+VIRTUA NBA - RECOMP para Linux x86_64  (Hecho por Pocket_lucho con Claude)
+=========================================================================
+
+Si quieres apoyarme: https://buymeacoffee.com/pocket_lucho
+
+REQUISITOS: SDL2, libcurl, PulseAudio/ALSA (vienen en cualquier escritorio), y para
+construir el juego: g++ y make   ->   sudo apt install build-essential libsdl2-2.0-0
+
+INSTALACIÓN
+1. Copia tu romset virnba.zip en la carpeta "roms".
+2. Copia la BIOS naomi.zip en la carpeta "data" (sólo hace falta la primera vez).
+3. Ejecuta UNA vez:   ./build_game.sh
+   Genera el código del juego a partir de TU ROM y lo compila en libvnba_game.so.
+4. Ejecuta:   ./VirtuaNBA-Recompiled
+
+Este paquete no contiene nada del juego. libvnba_game.so y data/vnba_boot_*.state se
+generan con tus archivos: no los compartas. Licencia GPL v2 (basado en Flycast).
+Código fuente: https://github.com/PocketLucho/Virtua-NBA---Recompilation
