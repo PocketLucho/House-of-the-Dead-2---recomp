@@ -487,16 +487,24 @@ void CheatManager::reset(const std::string& gameId)
 found_cheats:
 #endif
 		size_t cheatCount = cheats.size();
-		if (gameId == "VIRTUA NBA")
+		if (gameId.substr(0, 5) == "hotd2")
 		{
-			// VIRTUA NBA - RECOMP built-in cheats (off by default, enabled from the Cheats menu)
+			// THE HOUSE OF THE DEAD 2 - RECOMP built-in cheats (off by default, enabled from the
+			// Cheats menu). Player records: 0x0C3D0420 + player * 0x100 (epr-21585):
+			//   +0x10 / +0x14 life (0 = not playing), +0x24 bullets in the gun
 			const bool on = getenv("VNBA_CHEATS") != nullptr;	// testing
-			// quarter clock in frames (7200 = 2:00), only while a game is being played
-			cheats.emplace_back(Cheat::Type::runNextIfNeq, "", true, 32, 0x00198068, 0, false);
-			cheats.emplace_back(Cheat::Type::setValue, T("Infinite game clock"), on, 32, 0x00198068, 7200, false);
-			// shot clock in frames (1440 = 24 s)
-			cheats.emplace_back(Cheat::Type::runNextIfNeq, "", true, 32, 0x0019E008, 0, false);
-			cheats.emplace_back(Cheat::Type::setValue, T("Infinite shot clock"), on, 32, 0x0019E008, 1440, false);
+			static const char * const lifeNames[] { "Infinite life (player 1)", "Infinite life (player 2)" };
+			for (u32 player = 0; player < 2; player++)
+			{
+				const u32 base = 0x003D0420 + player * 0x100;
+				cheats.emplace_back(Cheat::Type::runNextIfNeq, "", true, 32, base + 0x10, 0, false);
+				cheats.emplace_back(Cheat::Type::setValue, T(lifeNames[player]), on, 32, base + 0x10, 5, false);
+				cheats.back().repeatCount = 2;
+				cheats.back().repeatAddressIncrement = 1;
+			}
+			cheats.emplace_back(Cheat::Type::setValue, T("Infinite ammo (no reload)"), on, 32, 0x003D0420 + 0x24, 6, false);
+			cheats.back().repeatCount = 2;
+			cheats.back().repeatAddressIncrement = 0x40;
 			setActive(true);
 		}
 		else if (gameId == "Fixed BOOT strapper")	// Extreme Hunting 2

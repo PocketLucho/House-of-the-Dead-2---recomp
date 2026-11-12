@@ -1,8 +1,8 @@
-// VIRTUA NBA - RECOMP: executable icon and version info
+// THE HOUSE OF THE DEAD 2 - RECOMP: executable icon and version info
 #include "../resource.h"
 #include "../../../core/version.h"
 
-IDI_ICON1               ICON                    "vnba.ico"
+IDI_ICON1               ICON                    "hotd2.ico"
 
 1 VERSIONINFO
 FILEVERSION     1,0,0,0
@@ -13,12 +13,12 @@ BEGIN
     BLOCK "040904E4"
     BEGIN
       VALUE "CompanyName", "Pocket_lucho"
-      VALUE "FileDescription", "VIRTUA NBA - RECOMP"
+      VALUE "FileDescription", "THE HOUSE OF THE DEAD 2 - RECOMP"
       VALUE "FileVersion", __DATE__
-      VALUE "InternalName", "VirtuaNBA-Recompiled"
-      VALUE "LegalCopyright", "Hecho por Pocket_lucho con Claude. Basado en Flycast (GNU GPL)."
-      VALUE "OriginalFilename", "VirtuaNBA-Recompiled.exe"
-      VALUE "ProductName", "VIRTUA NBA - RECOMP"
+      VALUE "InternalName", "HouseOfTheDead2-Recompiled"
+      VALUE "LegalCopyright", "Made by Pocket_lucho with Claude. Based on Flycast (GNU GPL)."
+      VALUE "OriginalFilename", "HouseOfTheDead2-Recompiled.exe"
+      VALUE "ProductName", "THE HOUSE OF THE DEAD 2 - RECOMP"
       VALUE "ProductVersion", __DATE__
     END
   END

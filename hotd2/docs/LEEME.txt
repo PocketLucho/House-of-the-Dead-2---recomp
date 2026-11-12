@@ -1,34 +1,45 @@
-﻿VIRTUA NBA - RECOMP  (Hecho por Pocket_lucho con Claude)
-=======================================================
+﻿THE HOUSE OF THE DEAD 2 - RECOMP  (Hecho por Pocket_lucho con Claude)
+=====================================================================
 
-Recompilación estática de Virtua NBA (Sega NAOMI, 2000).
+Recompilación estática de The House of the Dead 2 (Sega NAOMI, 1998).
 Si quieres apoyarme: https://buymeacoffee.com/pocket_lucho
 
 INSTALACIÓN
-1. Copia tu romset virnba.zip en la carpeta "roms".
-2. Copia la BIOS naomi.zip en la carpeta "data" (sólo hace falta la primera vez).
-3. Ejecuta CONSTRUIR_JUEGO.bat UNA vez. Descarga el compilador gratuito llvm-mingw
-   (180 MB, sólo la primera vez), genera el código del juego a partir de TU ROM y lo
-   compila en vnba_game.dll (de 3 a 15 minutos).
-4. Ejecuta VirtuaNBA-Recompiled.exe.
+1. Copia tu romset hotd2.zip en la carpeta "roms". El juego tiene su propia BIOS
+   (epr-21329/21330/21331.ic27, NO es naomi.zip): si tu hotd2.zip no trae esos archivos,
+   copia también hod2bios.zip en "roms". Sólo hace falta la primera vez.
+2. Ejecuta UNA vez CONSTRUIR_JUEGO.bat. Descarga el compilador libre llvm-mingw (180 MB,
+   sólo la primera vez), genera el código del juego a partir de TU ROM y lo compila en
+   hotd2_game.dll (de 3 a 15 minutos).
+3. Ejecuta HouseOfTheDead2-Recompiled.exe.
 
-Este paquete no contiene nada del juego: ni ROM, ni BIOS, ni gráficos, ni sonido, ni
-código. vnba_game.dll y data\vnba_boot_*.state se generan a partir de tus archivos:
-no los compartas.
+Este paquete no contiene nada del juego: ni ROM, ni BIOS, ni gráficos, sonido o código.
+hotd2_game.dll y data\hotd2_boot_*.state se generan con tus archivos: no los compartas.
 
-OPCIONES (tecla Tab o el menú)
-- Video: "Panorámico 16:9" (cámara 16:9 real con el marcador en 4:3), "Antialiasing (FXAA)",
-  Resolución interna (supermuestreo).
-- General: Región (Japón, EE. UU., Exportación, Corea). La primera vez que uses una región
-  hace falta naomi.zip.
-- Menú: Reiniciar, Trucos (reloj de partido infinito, reloj de posesión infinito).
-- Red: juego online con GGPO (experimental). Los dos jugadores con la misma versión, el
-  mismo romset y la misma opción de panorámico.
+CONTROLES (jugador 1 = ratón como pistola)
+  Ratón                  apuntar (punto de mira rojo)
+  Botón izquierdo        disparar
+  Botón derecho          recargar
+  Botón central / Enter  START
+  Q                      insertar moneda (sólo con el juego libre desactivado)
+  Tab                    menú: Continuar, Reiniciar, Ajustes, Trucos, Salir
+  Alt+Enter              pantalla completa
+Jugador 2 (mando o segundo ratón) y puntos de mira: Ajustes -> Controles.
+
+OPCIONES (tecla Tab)
+- General: Región (Japón, EE. UU., Exportación), Color de la sangre (rojo / verde),
+  Juego libre (activado por defecto).
+- Vídeo: "Widescreen 16:9" (cámara 16:9 real, HUD en 4:3, la pistola apunta en toda la
+  imagen), "Antialiasing (FXAA)", Resolución interna (supermuestreo), Interpolación nativa
+  de profundidad.
+- Trucos: vida infinita (jugador 1 / jugador 2), munición infinita (sin recargar).
+- El menú de test del propio juego (dificultad, vidas, calibración de la pistola) se abre
+  con el botón Test (ver Ajustes -> Controles).
 
 PROBLEMAS
-- "Falta el código del juego": ejecuta CONSTRUIR_JUEGO.bat.
-- Tras actualizar el .exe a una versión nueva: vuelve a ejecutar CONSTRUIR_JUEGO.bat.
-- Arranque raro: borra data\vnba_boot_*.state (se vuelve a crear con naomi.zip).
+- "No se encuentra el módulo de código del juego": ejecuta CONSTRUIR_JUEGO.bat.
+- Tras actualizar el .exe a una versión nueva: ejecuta CONSTRUIR_JUEGO.bat otra vez.
+- Problemas de arranque: borra data\hotd2_boot_*.state (se vuelve a crear con la BIOS).
 
 Licencia GPL v2 (basado en Flycast). Código fuente:
-https://github.com/PocketLucho/Virtua-NBA---Recompilation
+https://github.com/PocketLucho/House-of-the-Dead-2---recomp

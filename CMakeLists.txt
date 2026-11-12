@@ -1577,7 +1577,7 @@ if(${CMAKE_GENERATOR} MATCHES "^Xcode.*|^Visual Studio.*")
 	source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SRC_FILES})
 endif()
 
-# Virtua NBA Recompiled: product build of the standalone frontend
+# The House of the Dead 2 Recompiled: product build of the standalone frontend (same switch as Virtua NBA Recomp)
 option(VNBA_PRODUCT "Build The House of the Dead 2 Recompiled product (standalone only)" OFF)
 if(VNBA_PRODUCT AND NOT LIBRETRO)
 	target_compile_definitions(${PROJECT_NAME} PRIVATE VNBA_PRODUCT)

@@ -365,6 +365,7 @@ extern Option<bool> AutoLoadState;
 extern Option<bool> AutoSaveState;
 extern Option<int, false> SavestateSlot;
 extern Option<bool> ForceFreePlay;
+extern Option<int> BloodColor;	// HOTD2: 0 = game setting, 1 = red, 2 = green
 extern Option<bool, false> FetchBoxart;
 extern Option<bool, false> BoxartDisplayMode;
 extern Option<int, false> UIScaling;

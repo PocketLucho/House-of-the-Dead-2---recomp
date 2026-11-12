@@ -2991,3 +2991,50 @@ msgstr "Reloj de partido infinito"
 msgid "Infinite shot clock"
 msgstr "Reloj de posesión infinito"
 
+msgid "Static recompilation of the SH-4 code of The House of the Dead 2 (Sega NAOMI, 1998)"
+msgstr "Recompilación estática del código SH-4 de The House of the Dead 2 (Sega NAOMI, 1998)"
+
+msgid "Native 16:9 mode: the game camera renders the full wide view while the HUD keeps its 4:3 proportions. The light gun aims over the whole picture.\nTakes effect the next time the program starts."
+msgstr "Modo 16:9 nativo: la cámara del juego genera la vista panorámica completa y el HUD mantiene sus proporciones 4:3. La pistola apunta en toda la imagen.\nSe aplica la próxima vez que se inicie el programa."
+
+msgid "Region of the game's BIOS: changes the warning screens and the texts.\nTakes effect the next time the program starts. The first time a region is used, the BIOS files (hod2bios.zip, or inside hotd2.zip) are needed to create its boot snapshot."
+msgstr "Región de la BIOS del juego: cambia las pantallas de aviso y los textos.\nSe aplica la próxima vez que se inicie el programa. La primera vez que se usa una región hacen falta los archivos de la BIOS (hod2bios.zip, o dentro de hotd2.zip) para crear su instantánea de arranque."
+
+msgid "Game setting"
+msgstr "Ajuste del juego"
+
+msgid "Red"
+msgstr "Rojo"
+
+msgid "Green"
+msgstr "Verde"
+
+msgid "Blood Color"
+msgstr "Color de la sangre"
+
+msgid "The cabinet's BLOOD COLOR setting (GAME ASSIGNMENTS in the test menu; green by default). Red or Green override it."
+msgstr "Ajuste BLOOD COLOR de la máquina (GAME ASSIGNMENTS en el menú de test; verde por defecto). Rojo o Verde lo fuerzan."
+
+msgid "Free Play"
+msgstr "Juego libre (Free Play)"
+
+msgid "Play without inserting coins. When disabled the cabinet is set to 1 coin 1 credit (Q inserts a coin).\nTakes effect the next time the game starts or is reset."
+msgstr "Jugar sin insertar monedas. Si se desactiva, la máquina queda en 1 moneda 1 crédito (Q inserta una moneda).\nSe aplica la próxima vez que se inicie o reinicie el juego."
+
+msgid "Light Guns"
+msgstr "Pistolas"
+
+msgid "Crosshair player 1 (red)"
+msgstr "Punto de mira del jugador 1 (rojo)"
+
+msgid "Crosshair player 2 (blue)"
+msgstr "Punto de mira del jugador 2 (azul)"
+
+msgid "Infinite life (player 1)"
+msgstr "Vida infinita (jugador 1)"
+
+msgid "Infinite life (player 2)"
+msgstr "Vida infinita (jugador 2)"
+
+msgid "Infinite ammo (no reload)"
+msgstr "Munición infinita (sin recargar)"

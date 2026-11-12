@@ -36,6 +36,7 @@ Option<bool> AutoLoadState("");
 Option<bool> AutoSaveState("");
 Option<int, false> SavestateSlot("");
 Option<bool> ForceFreePlay(CORE_OPTION_NAME "_force_freeplay", true);
+Option<int> BloodColor("", 0);
 
 // Sound
 

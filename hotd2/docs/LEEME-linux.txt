@@ -1,5 +1,5 @@
-VIRTUA NBA - RECOMP para Linux x86_64  (Hecho por Pocket_lucho con Claude)
-=========================================================================
+THE HOUSE OF THE DEAD 2 - RECOMP para Linux x86_64  (Hecho por Pocket_lucho con Claude)
+=======================================================================================
 
 Si quieres apoyarme: https://buymeacoffee.com/pocket_lucho
 
@@ -7,12 +7,16 @@ REQUISITOS: SDL2, libcurl, PulseAudio/ALSA (vienen en cualquier escritorio), y p
 construir el juego: g++ y make   ->   sudo apt install build-essential libsdl2-2.0-0
 
 INSTALACIÓN
-1. Copia tu romset virnba.zip en la carpeta "roms".
-2. Copia la BIOS naomi.zip en la carpeta "data" (sólo hace falta la primera vez).
-3. Ejecuta UNA vez:   ./build_game.sh
-   Genera el código del juego a partir de TU ROM y lo compila en libvnba_game.so.
-4. Ejecuta:   ./VirtuaNBA-Recompiled
+1. Copia tu romset hotd2.zip en la carpeta "roms". El juego tiene su propia BIOS
+   (epr-21329/21330/21331.ic27, NO es naomi.zip): si tu hotd2.zip no trae esos archivos,
+   copia también hod2bios.zip en "roms" (sólo hace falta la primera vez).
+2. Ejecuta UNA vez:   ./build_game.sh
+   Genera el código del juego a partir de TU ROM y lo compila en libhotd2_game.so.
+3. Ejecuta:   ./HouseOfTheDead2-Recompiled
 
-Este paquete no contiene nada del juego. libvnba_game.so y data/vnba_boot_*.state se
+Ratón = pistola del jugador 1 (izquierdo: disparar, derecho: recargar, central / Enter:
+START, Tab: menú).
+
+Este paquete no contiene nada del juego. libhotd2_game.so y data/hotd2_boot_*.state se
 generan con tus archivos: no los compartas. Licencia GPL v2 (basado en Flycast).
-Código fuente: https://github.com/PocketLucho/Virtua-NBA---Recompilation
+Código fuente: https://github.com/PocketLucho/House-of-the-Dead-2---recomp

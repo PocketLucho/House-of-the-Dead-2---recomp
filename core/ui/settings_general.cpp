@@ -273,7 +273,10 @@ void gui_settings_general()
 		if (config::Region > 2)
 			config::Region = 1;
 		OptionComboBox(T("Region"), config::Region, arcadeRegion, std::size(arcadeRegion),
-				T("Region of the game's BIOS: changes the warning screens, the texts and the default blood colour (it can also be changed in the game's test menu).\nTakes effect the next time the program starts. The first time a region is used, the BIOS files (hod2bios.zip, or inside hotd2.zip) are needed to create its boot snapshot."));
+				T("Region of the game's BIOS: changes the warning screens and the texts.\nTakes effect the next time the program starts. The first time a region is used, the BIOS files (hod2bios.zip, or inside hotd2.zip) are needed to create its boot snapshot."));
+		const char *blood[] = { T("Game setting"), T("Red"), T("Green") };
+		OptionComboBox(T("Blood Color"), config::BloodColor, blood, std::size(blood),
+				T("The cabinet's BLOOD COLOR setting (GAME ASSIGNMENTS in the test menu; green by default). Red or Green override it."));
 	}
 #endif
 

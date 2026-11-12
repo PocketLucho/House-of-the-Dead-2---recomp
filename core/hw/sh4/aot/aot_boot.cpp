@@ -140,8 +140,13 @@ bool validSnapshot(const std::string& file)
 // frame stretched to 16:9, sprites / HUD squeezed back. Flycast's light gun mapping and the
 // crosshair already follow the horizontal stretching.
 //   VNBA_WS_MODE=stretch|off   (product: Settings -> Video -> Widescreen)
-bool aot_ws_active;
+bool aot_ws_active;	// aot_ws_tick() wanted (widescreen, free play, gun range, cheats)
+static bool wsOn, freePlayOn;
 constexpr u32 HOTD2_ASPECT_ADDR = 0x0C09A848;
+// The game's working copy of the cabinet coin settings (filled from the BIOS during start-up):
+// byte 0 = coin/credit setting - 1 (26 = free play), byte 1 = free play flag
+constexpr u32 HOTD2_COIN_SETTING = 0x0C3CFBE8;
+constexpr u32 HOTD2_GAME_SETTINGS = 0x0C3D1098;
 constexpr u32 ASPECT_4_3 = 0x3FAAAAAA;
 struct Vertex; struct PolyParam;
 extern void (*vnba_poly_hook)(Vertex *v, u32 count, u32 listType, PolyParam *pp);
@@ -166,6 +171,33 @@ static bool wsEnabled()
 #endif
 }
 
+// Light gun range. The game converts the raw gun position (8 bits per axis) to screen coordinates
+// relative to the centre with a three point table (raw 0 / 128 / 255 -> x -300 / 0 / 300,
+// y 220 / 0 / -220; function 0x0C06BEB6) and rejects anything outside -320..319 as off-screen.
+// The real cabinet's guns never reach the screen edges; a mouse does, so the table is widened
+// to the whole picture (the shot lands under the crosshair), and to the whole 16:9 view in
+// widescreen mode (x up to +-427 in 4:3 units), where the shots stayed inside the 4:3 area.
+static void hotd2GunRange(bool wide)
+{
+	constexpr u32 TABLE = 0x0C0FB020;	// s16 x[3], y[3]
+	constexpr u32 LIMITS = 0x0C06BF08;	// s16 max x, min x (literals of 0x0C06BE3A)
+	const u16 *t = (const u16 *)&mem_b[TABLE & RAM_MASK];
+	const u16 *l = (const u16 *)&mem_b[LIMITS & RAM_MASK];
+	// only this program version (epr-21585), and only values written by the game or by us
+	if (t[1] != 0 || t[4] != 0 || (t[2] != 300 && t[2] != 320 && t[2] != 427))
+		return;
+	const s16 x = wide ? 427 : 320;
+	if (t[2] == (u16)x && l[0] == (u16)(x - 1))
+		return;
+	addrspace::write16(TABLE, (u16)-x);
+	addrspace::write16(TABLE + 4, (u16)x);
+	addrspace::write16(TABLE + 6, 240);
+	addrspace::write16(TABLE + 10, (u16)-240);
+	addrspace::write16(LIMITS, (u16)(x - 1));
+	addrspace::write16(LIMITS + 2, (u16)-x);
+	INFO_LOG(BOOT, "AOT: light gun range set to +-%d x +-240", x);
+}
+
 static u32 wsPatched;
 void aot_ws_tick()
 {
@@ -182,6 +214,17 @@ void aot_ws_tick()
 	const bool hotd2 = aot_game_id() == "hotd2";
 	if (hotd2)
 	{
+		if (freePlayOn)
+		{
+			mem_b[HOTD2_COIN_SETTING & RAM_MASK] = 26;
+			mem_b[(HOTD2_COIN_SETTING + 1) & RAM_MASK] = 1;
+		}
+		// game assignments, working copy of the backup data: +7 = BLOOD COLOR (0 red, 1 green)
+		if (config::BloodColor == 1 || config::BloodColor == 2)
+			mem_b[(HOTD2_GAME_SETTINGS + 7) & RAM_MASK] = (u8)(config::BloodColor - 1);
+		hotd2GunRange(wsOn);
+		if (!wsOn)
+			return;
 		if (*(const u32 *)&mem_b[HOTD2_ASPECT_ADDR & RAM_MASK] == ASPECT_4_3)
 		{
 			addrspace::write32(HOTD2_ASPECT_ADDR, wide);
@@ -218,8 +261,10 @@ static void applyGamePatches()
 {
 	extern float vnba_sprite_squeeze, vnba_sprite_keep_z;
 	extern bool vnba_sprite_fill_edges;
-	aot_ws_active = wsEnabled();
-	if (!aot_ws_active)
+	wsOn = wsEnabled();
+	freePlayOn = config::ForceFreePlay && aot_game_id() == "hotd2";
+	aot_ws_active = wsOn || aot_game_id() == "hotd2";
+	if (!wsOn)
 	{
 		vnba_sprite_squeeze = 1.f;
 		if (vnba_poly_hook == wsPolyHook)
@@ -303,8 +348,15 @@ static bool eepromValid(const u8 *e)
 }
 static void applyFreePlay()
 {
-	if (EEPROM == nullptr || !eepromValid(EEPROM) || aot_game_id() != "hotd2")
+	if (EEPROM == nullptr || aot_game_id() != "hotd2")
 		return;
+	if (!eepromValid(EEPROM))
+	{
+		// Blank EEPROM (very first start): the game would write this default system record itself
+		static const u8 defaults[20] { 0, 0, 0, 0, 0x18, 1, 0, 0, 1, 1, 1, 0, 2, 1, 1, 1, 1, 1, 1, 1 };
+		memcpy(EEPROM + 2, defaults, sizeof(defaults));
+		EEPROM[9] = 0xff;	// set below
+	}
 	constexpr u8 FREE_PLAY = 26;
 	u8 coin = EEPROM[9];
 	if (config::ForceFreePlay)

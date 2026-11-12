@@ -24,11 +24,11 @@ jobs:
           curl -sL -o lm.tar.xz https://github.com/mstorsjo/llvm-mingw/releases/download/20251104/llvm-mingw-20251104-ucrt-ubuntu-22.04-x86_64.tar.xz
           tar -xf lm.tar.xz -C $HOME
       - name: Build package
-        run: LLVM_MINGW=$HOME/llvm-mingw-20251104-ucrt-ubuntu-22.04-x86_64 vnba/tools/package_windows.sh $PWD/dist
+        run: LLVM_MINGW=$HOME/llvm-mingw-20251104-ucrt-ubuntu-22.04-x86_64 hotd2/tools/package_windows.sh $PWD/dist
       - uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: dist/VirtuaNBA-Recomp-win64.zip
+          path: dist/HouseOfTheDead2-Recomp-win64.zip
 
   linux:
     runs-on: ubuntu-22.04
@@ -42,9 +42,9 @@ jobs:
           sudo apt-get install -y build-essential cmake ninja-build libsdl2-dev libcurl4-openssl-dev \
             libudev-dev libpulse-dev libasound2-dev libgl-dev libzip-dev zlib1g-dev libao-dev
       - name: Build package
-        run: vnba/tools/package_linux.sh $PWD/dist
+        run: hotd2/tools/package_linux.sh $PWD/dist
       - uses: actions/upload-artifact@v4
         with:
           name: linux
-          path: dist/VirtuaNBA-Recomp-linux-x64.tar.gz
+          path: dist/HouseOfTheDead2-Recomp-linux-x64.tar.gz
 

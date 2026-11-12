@@ -1,6 +1,6 @@
-﻿# VIRTUA NBA - RECOMP : builder
-# Generates the recompiled game code from YOUR Virtua NBA ROM and compiles it into vnba_game.dll.
-# Genera el código recompilado del juego a partir de TU ROM y lo compila en vnba_game.dll.
+﻿# THE HOUSE OF THE DEAD 2 - RECOMP : builder
+# Generates the recompiled game code from YOUR The House of the Dead 2 ROM and compiles it into hotd2_game.dll.
+# Genera el código recompilado del juego a partir de TU ROM y lo compila en hotd2_game.dll.
 #
 # Nothing derived from the game is distributed: this runs on your PC with your own files.
 # No se distribuye nada derivado del juego: todo se hace en tu PC con tus propios archivos.
@@ -9,7 +9,7 @@ $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 $builder = $PSScriptRoot
 $root = Split-Path -Parent $builder
-$exe = Join-Path $root 'VirtuaNBA-Recompiled.exe'
+$exe = Join-Path $root 'HouseOfTheDead2-Recompiled.exe'
 $toolsDir = Join-Path $builder 'tools'
 $tcName = 'llvm-mingw-20251104-ucrt-x86_64'
 $tcUrl = "https://github.com/mstorsjo/llvm-mingw/releases/download/20251104/$tcName.zip"
@@ -20,12 +20,12 @@ $objDir = Join-Path $builder 'obj'
 function Say($es, $en) { Write-Host ""; Write-Host "== $es" -ForegroundColor Cyan; Write-Host "   $en" -ForegroundColor DarkCyan }
 function Fail($es, $en) { Write-Host ""; Write-Host "ERROR: $es" -ForegroundColor Red; Write-Host "       $en" -ForegroundColor Red; exit 1 }
 
-Say 'VIRTUA NBA - RECOMP: construcción del código del juego' 'VIRTUA NBA - RECOMP: building the game code'
+Say 'THE HOUSE OF THE DEAD 2 - RECOMP: construcción del código del juego' 'THE HOUSE OF THE DEAD 2 - RECOMP: building the game code'
 
 # 1. ROM
-$rom = @((Join-Path $root 'roms\virnba.zip'), (Join-Path $root 'virnba.zip')) | Where-Object { Test-Path $_ } | Select-Object -First 1
+$rom = @((Join-Path $root 'roms\hotd2.zip'), (Join-Path $root 'hotd2.zip')) | Where-Object { Test-Path $_ } | Select-Object -First 1
 if (-not $rom) {
-	Fail "No se encuentra roms\virnba.zip. Copia tu romset de Virtua NBA en la carpeta 'roms'." "roms\virnba.zip not found. Copy your Virtua NBA romset to the 'roms' folder."
+	Fail "No se encuentra roms\hotd2.zip. Copia tu romset de The House of the Dead 2 en la carpeta 'roms'." "roms\hotd2.zip not found. Copy your The House of the Dead 2 romset to the 'roms' folder."
 }
 if (-not (Test-Path $exe)) { Fail "No se encuentra $exe" "$exe not found" }
 
@@ -53,13 +53,13 @@ $env:VNBA_AOT = '1'
 # relative to the game folder (the executable runs there): avoids problems with non-ASCII paths
 $env:VNBA_GENERATE = 'builder\gen'
 $env:VNBA_AOT_DUMP = 'builder\gen\dump.cpp'
-$env:VNBA_AOT_STATIC = 'builder\vnba_seeds.txt'
+$env:VNBA_AOT_STATIC = 'builder\hotd2_seeds.txt'
 $env:VNBA_AOT_STATIC_PTR = '1'
 $env:VNBA_AOT_STATIC_SZ1 = '1'
 $p = Start-Process -FilePath $exe -WorkingDirectory $root -PassThru -Wait
 Remove-Item Env:VNBA_AOT, Env:VNBA_GENERATE, Env:VNBA_AOT_DUMP, Env:VNBA_AOT_STATIC, Env:VNBA_AOT_STATIC_PTR, Env:VNBA_AOT_STATIC_SZ1
 if (-not (Test-Path (Join-Path $genDir 'aot_gen_table.cpp'))) {
-	Fail "La generación ha fallado (código $($p.ExitCode)). La primera vez hace falta la BIOS naomi.zip en la carpeta 'data'." "Generation failed (code $($p.ExitCode)). The first time, the NAOMI BIOS naomi.zip is needed in the 'data' folder."
+	Fail "La generación ha fallado (código $($p.ExitCode)). La primera vez hace falta la BIOS del juego: hod2bios.zip en la carpeta 'roms' (o un hotd2.zip que la incluya)." "Generation failed (code $($p.ExitCode)). The first time, the game's BIOS is needed: hod2bios.zip in the 'roms' folder (or a hotd2.zip that includes it)."
 }
 Remove-Item (Join-Path $genDir 'dump.cpp') -ErrorAction SilentlyContinue
 
@@ -76,4 +76,4 @@ try {
 
 # 5. Clean up the generated sources (they contain code derived from the game)
 Remove-Item -Recurse -Force $genDir, $objDir
-Say "¡Listo! Ya puedes ejecutar VirtuaNBA-Recompiled.exe" "Done! You can now run VirtuaNBA-Recompiled.exe"
+Say "¡Listo! Ya puedes ejecutar HouseOfTheDead2-Recompiled.exe" "Done! You can now run HouseOfTheDead2-Recompiled.exe"
