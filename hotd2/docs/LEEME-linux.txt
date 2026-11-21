@@ -1,21 +1,42 @@
-THE HOUSE OF THE DEAD 2 - RECOMP para Linux x86_64  (Hecho por Pocket_lucho con Claude)
-=======================================================================================
+THE HOUSE OF THE DEAD 2 - RECOMP para Linux x86_64 y SteamOS  (Hecho por Pocket_lucho con Claude)
+==================================================================================================
 
 Si quieres apoyarme: https://buymeacoffee.com/pocket_lucho
 
-REQUISITOS: SDL2, libcurl, PulseAudio/ALSA (vienen en cualquier escritorio), y para
-construir el juego: g++ y make   ->   sudo apt install build-essential libsdl2-2.0-0
+REQUISITOS: no hay que instalar nada. Funciona en SteamOS (Steam Deck, Legion Go S...),
+Ubuntu, Fedora, Arch, etc. Si el sistema no tiene compilador de C++, build_game.sh descarga
+uno portátil (Zig, ~45 MB) la primera vez, dentro de esta carpeta. No hace falta sudo.
+Sólo hace falta conexión a internet la primera vez si no tienes g++.
 
 INSTALACIÓN
 1. Copia tu romset hotd2.zip en la carpeta "roms". El juego tiene su propia BIOS
    (epr-21329/21330/21331.ic27, NO es naomi.zip): si tu hotd2.zip no trae esos archivos,
    copia también hod2bios.zip en "roms" (sólo hace falta la primera vez).
-2. Ejecuta UNA vez:   ./build_game.sh
+2. Abre una terminal en esta carpeta y ejecuta UNA vez:   ./build_game.sh
    Genera el código del juego a partir de TU ROM y lo compila en libhotd2_game.so.
-3. Ejecuta:   ./HouseOfTheDead2-Recompiled
+3. Para jugar ejecuta:   ./HouseOfTheDead2.sh
+   (si falla, el motivo se muestra en una ventana y se guarda en hotd2.log)
 
-Ratón = pistola del jugador 1 (izquierdo: disparar, derecho: recargar, central / Enter:
-START, Tab: menú).
+CONTROLES
+  Ratón = pistola del jugador 1: botón izquierdo dispara, derecho recarga, central / Enter START.
+  Mando: el stick izquierdo apunta, A o R2 disparan, B o L2 recargan, Start = START,
+  Back = menú.
+  Tab: menú (Continuar, Reiniciar, Ajustes, Trucos, Salir).
+
+STEAMOS (Steam Deck / Legion Go S)
+1. Pasa al Modo Escritorio (botón Steam > Apagar > Cambiar al escritorio).
+2. Descomprime el .tar.gz (por ejemplo en ~/Games/HouseOfTheDead2-Recomp) y copia la ROM.
+3. En el gestor de archivos (Dolphin), dentro de la carpeta: botón derecho > "Abrir terminal
+   aquí" y escribe:
+       chmod +x build_game.sh HouseOfTheDead2.sh HouseOfTheDead2-Recompiled
+       ./build_game.sh
+4. Prueba el juego con ./HouseOfTheDead2.sh
+5. Para jugar en Modo Juego: abre Steam en el escritorio > "Añadir un juego" > "Añadir un
+   juego que no es de Steam" > Examinar > elige HouseOfTheDead2.sh (pon el filtro en "Todos
+   los archivos"). Vuelve al Modo Juego y estará en tu biblioteca.
+6. Apuntar: el stick izquierdo funciona directamente. Para apuntar con más precisión, en la
+   configuración del mando del juego en Steam pon el trackpad derecho (o el giroscopio)
+   "Como ratón"; R2 y L2 siguen disparando y recargando.
 
 Este paquete no contiene nada del juego. libhotd2_game.so y data/hotd2_boot_*.state se
 generan con tus archivos: no los compartas. Licencia GPL v2 (basado en Flycast).

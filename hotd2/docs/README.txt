@@ -24,6 +24,7 @@ CONTROLS (player 1 = mouse as light gun)
   Q                      insert coin (only if Free Play is disabled)
   Tab                    menu: Resume, Reset, Settings, Cheats, Exit
   Alt+Enter              full screen
+  Gamepad                left stick aims, A / R2 fire, B / L2 reload, Start = START
 Player 2 (gamepad or second mouse) and the crosshairs: Settings -> Controls.
 
 OPTIONS (Tab key)

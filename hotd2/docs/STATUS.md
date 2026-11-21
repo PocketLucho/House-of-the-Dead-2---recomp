@@ -1,6 +1,6 @@
 # Development notes — The House of the Dead 2 Recomp
 
-Last update: 2026-11-12
+Last update: 2026-11-21
 
 ## Working
 
@@ -30,11 +30,24 @@ Last update: 2026-11-12
 * Spanish UI texts for all the new options; Reset button and FXAA come from the shared engine.
 * Not possible: ray tracing (the game sends already projected triangles to the PowerVR2).
 
+## 2026-11-21: SteamOS (same structure as Virtua NBA - Recomp)
+
+* Portable Linux engine: SDL and libzip linked statically, static libstdc++, no libcurl / libao / OpenMP.
+  `package_linux.sh` fails if the binary needs a library outside a portable allowlist.
+* `build_game.sh` needs no `make`; if there is no working C++ compiler it downloads a pinned portable Zig
+  toolchain into `builder/tools` (SHA-256 checked, no sudo). The module targets glibc 2.28.
+* `HouseOfTheDead2.sh` launcher: runs the builder if the module is missing, logs to `hotd2.log` and shows
+  errors in a window; it is the file to add to Steam as a non-Steam game.
+* Gamepad layout of the product (Steam Deck in Game Mode): left stick aims, A / R2 fire, B / L2 reload.
+* CI: an Arch Linux container with no compiler checks that the engine's libraries resolve and that the
+  builder bootstraps Zig and builds a module (synthetic sources, `hotd2/tools/make_test_gen.sh`).
+* Coverage: a cheat-assisted two-player run through the whole game (215,000 frames, up to the final boss)
+  left 2 blocks to the interpreter; they are in `hotd2_seeds.txt` now.
+
 ## Pending
 
 1. Test on Windows with a real GPU, a real mouse and a second player.
 2. The title screen is a full-screen 2D picture: in 16:9 its sides are filled with the stretched edge column.
 3. Other program revisions (`hotd2o` `epr-21385`, `hotd2e` `epr-21805`, `hotd2p`): they need their own entry
    in the header-less table and their own patch addresses; only `epr-21585` is supported.
-4. Coverage of chapters 3–6 was not exercised by the scripted runs; anything the static decoder missed runs
-   through the interpreter fallback (correct, slower).
+4. Test on a real Steam Deck (Game Mode, gamepad / trackpad aiming).

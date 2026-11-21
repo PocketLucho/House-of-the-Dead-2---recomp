@@ -139,6 +139,19 @@ public:
 		{
 			if constexpr (Gamepad)
 			{
+#ifdef VNBA_PRODUCT
+				// THE HOUSE OF THE DEAD 2 - RECOMP: light gun with a gamepad (Steam Deck in Game Mode).
+				// The left stick aims (absolute position, see GamepadDevice::gamepad_axis_input),
+				// A or R2 fire, B or L2 reload (off-screen shot), Start = START, Back = menu.
+				map_button(SDL_CONTROLLER_BUTTON_A, DC_BTN_A);
+				map_button(SDL_CONTROLLER_BUTTON_B, DC_BTN_RELOAD);
+				map_button(SDL_CONTROLLER_BUTTON_X, DC_BTN_C);
+				map_button(SDL_CONTROLLER_BUTTON_Y, DC_BTN_X);
+				if (!map_axis(SDL_CONTROLLER_AXIS_TRIGGERRIGHT, DC_BTN_A, true))
+					map_button(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER, DC_BTN_A);
+				if (!map_axis(SDL_CONTROLLER_AXIS_TRIGGERLEFT, DC_BTN_RELOAD, true))
+					map_button(SDL_CONTROLLER_BUTTON_LEFTSHOULDER, DC_BTN_RELOAD);
+#else
 				// 1  2  3  4  5  6
 				// A  B  X  Y  R  L
 				map_button(SDL_CONTROLLER_BUTTON_A, DC_BTN_A);
@@ -154,6 +167,7 @@ public:
 					map_button(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER, DC_AXIS_RT);
 				else
 					map_button(SDL_CONTROLLER_BUTTON_RIGHTSHOULDER, DC_BTN_Y);
+#endif
 			}
 			else
 			{

@@ -24,6 +24,8 @@ CONTROLES (jugador 1 = ratón como pistola)
   Q                      insertar moneda (sólo con el juego libre desactivado)
   Tab                    menú: Continuar, Reiniciar, Ajustes, Trucos, Salir
   Alt+Enter              pantalla completa
+  Mando                  stick izquierdo apunta, A / R2 disparan, B / L2 recargan,
+                         Start = START
 Jugador 2 (mando o segundo ratón) y puntos de mira: Ajustes -> Controles.
 
 OPCIONES (tecla Tab)

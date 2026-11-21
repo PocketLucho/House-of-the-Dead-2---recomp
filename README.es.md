@@ -16,7 +16,7 @@ Si quieres apoyarme: https://buymeacoffee.com/pocket_lucho
 * La **BIOS propia del juego** (`epr-21329/21330/21331.ic27`): dentro de un `hotd2.zip` no fusionado o en un
   `hod2bios.zip` aparte. Este juego **no** usa el `naomi.zip` normal. Sólo hace falta la primera vez que se
   usa cada región, para crear una instantánea de arranque; después el juego arranca sin ella.
-* Windows 10/11 x64, o Linux x86_64 (glibc 2.35+, p. ej. Ubuntu 22.04 o posterior).
+* Windows 10/11 x64, o Linux x86_64 (glibc 2.35+: SteamOS 3, Ubuntu 22.04 o posterior, Fedora, Arch...).
 
 **Ni este repositorio ni las versiones publicadas incluyen código, gráficos, sonido o BIOS del juego.**
 El código recompilado se genera en tu PC a partir de tu propia ROM.
@@ -44,6 +44,7 @@ El código recompilado se genera en tu PC a partir de tu propia ROM.
 | Q | insertar moneda (sólo con el juego libre desactivado) |
 | Tab | menú (Continuar, Reiniciar, Ajustes, Trucos, Salir) |
 | Alt+Enter | pantalla completa |
+| Mando | stick izquierdo apunta, A / R2 disparan, B / L2 recargan, Start = START, Back = menú |
 
 El jugador 2 (mando o un segundo ratón con "Use Raw Input") se configura en Ajustes → Controles.
 
@@ -65,11 +66,16 @@ El jugador 2 (mando o un segundo ratón con "Use Raw Input") se configura en Aju
 No es posible: ray tracing. El juego no entrega una escena 3D al hardware; envía al PowerVR2 triángulos ya
 proyectados e iluminados, así que no hay geometría, materiales ni luces contra los que trazar rayos.
 
-## Primeros pasos (Linux x86_64)
+## Primeros pasos (Linux x86_64 / SteamOS)
 
 Descarga `HouseOfTheDead2-Recomp-linux-x64.tar.gz`, descomprímelo, copia la ROM como arriba, ejecuta una vez
-`./build_game.sh` (necesita `g++` y `make`: `sudo apt install build-essential`) y después
-`./HouseOfTheDead2-Recompiled`.
+`./build_game.sh` y juega con `./HouseOfTheDead2.sh`. No hay que instalar nada: si no hay compilador de C++
+(SteamOS), el constructor descarga uno portátil (Zig) en su propia carpeta. En SteamOS hazlo en el Modo Escritorio
+y después añade `HouseOfTheDead2.sh` a Steam como juego que no es de Steam. Más detalles en `LEEME-linux.txt`
+dentro del paquete.
+
+Con mando (Steam Deck en Modo Juego) el stick izquierdo apunta la pistola, A o R2 disparan y B o L2 recargan.
+También sirve el trackpad o el giroscopio "como ratón" de Steam Input, que es más preciso.
 
 ## Compilar desde el código fuente
 

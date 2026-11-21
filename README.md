@@ -16,7 +16,7 @@ If you want to support me: https://buymeacoffee.com/pocket_lucho
 * The game's own **BIOS** (`epr-21329/21330/21331.ic27`): either inside a non-merged `hotd2.zip` or as a
   separate `hod2bios.zip`. This game does **not** use the regular `naomi.zip`. The BIOS is only needed the
   first time each region is used, to create a boot snapshot; after that the game boots without it.
-* Windows 10/11 x64, or Linux x86_64 (glibc 2.35+, e.g. Ubuntu 22.04 or newer).
+* Windows 10/11 x64, or Linux x86_64 (glibc 2.35+: SteamOS 3, Ubuntu 22.04 or newer, Fedora, Arch...).
 
 **No game code, graphics, sound or BIOS is included in this repository or in the releases.**
 The recompiled code is generated on your PC from your own ROM (see below).
@@ -44,6 +44,7 @@ The recompiled code is generated on your PC from your own ROM (see below).
 | Q | insert coin (only when Free Play is disabled) |
 | Tab | menu (Resume, Reset, Settings, Cheats, Exit) |
 | Alt+Enter | full screen |
+| Gamepad | left stick aims, A / R2 fire, B / L2 reload, Start = START, Back = menu |
 
 Player 2 (gamepad or a second mouse with "Use Raw Input") is configured in Settings → Controls.
 
@@ -66,11 +67,15 @@ Not possible: ray tracing. The game does not hand a 3D scene to the hardware; it
 already projected and lit to the PowerVR2, so there is no scene geometry, material or light information
 to trace against.
 
-## Getting started (Linux x86_64)
+## Getting started (Linux x86_64 / SteamOS)
 
 Download `HouseOfTheDead2-Recomp-linux-x64.tar.gz`, extract it, copy the ROM as above, then run
-`./build_game.sh` once (needs `g++` and `make`: `sudo apt install build-essential`) and
-`./HouseOfTheDead2-Recompiled`.
+`./build_game.sh` once and play with `./HouseOfTheDead2.sh`. Nothing needs to be installed: if there is no C++
+compiler (SteamOS), the builder downloads a portable one (Zig) into its own folder. On SteamOS do this in
+Desktop Mode, then add `HouseOfTheDead2.sh` to Steam as a non-Steam game. See `README-linux.txt` in the package.
+
+With a gamepad (Steam Deck in Game Mode) the left stick aims the gun, A or R2 fire and B or L2 reload.
+Steam Input's trackpad or gyro "as mouse" also works and is more precise.
 
 ## Releases
 

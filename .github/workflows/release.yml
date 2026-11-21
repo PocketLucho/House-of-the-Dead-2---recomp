@@ -43,8 +43,8 @@ jobs:
       - name: Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential cmake ninja-build libsdl2-dev libcurl4-openssl-dev \
-            libudev-dev libpulse-dev libasound2-dev libgl-dev libzip-dev zlib1g-dev libao-dev
+          sudo apt-get install -y build-essential cmake ninja-build libsdl2-dev \
+            libudev-dev libpulse-dev libasound2-dev libgl-dev zlib1g-dev
       - name: Build package
         run: hotd2/tools/package_linux.sh $PWD/dist
       - uses: actions/upload-artifact@v4
